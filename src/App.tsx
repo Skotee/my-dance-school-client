@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -8,7 +7,9 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-
+import  Students  from './screens/students.jsx'
+import Groups from './screens/Groups.jsx'
+import styled from 'styled-components'
 
 function Home() {
   return (
@@ -18,76 +19,55 @@ function Home() {
   )
 }
 
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  )
-}
+const Container = styled.div`
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100vh;
 
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  )
-}
+`
+const SideNav = styled.ul`
+  list-style: none;
+  flex: 0 0 200px;
+  background-color: #282c34;
+  margin: 0;
+  li a{
+    color: white;
+  }
+`
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> or save to reloasdsd.
-        </p>
         <Router>
-          <div>
-            <ul>
+          <Container>
+            <SideNav>
               <li>
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/students">Kursanci</Link>
               </li>
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/groups">Grupy</Link>
               </li>
-            </ul>
-
-            <hr />
-
-            {/*
-              A <Switch> looks through all its children <Route>
-              elements and renders the first one whose path
-              matches the current URL. Use a <Switch> any time
-              you have multiple routes, but you want only one
-              of them to render at a time
-            */}
-            <Switch>
+            </SideNav>
+              <div>
+              <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/about">
-                <About />
+              <Route path="/students">
+                <Students />
               </Route>
-              <Route path="/dashboard">
-                <Dashboard />
+              <Route path="/groups">
+                <Groups />
               </Route>
             </Switch>
-          </div>
+              </div>
+           
+          </Container>
         </Router>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        
-      </header>
     </div>
   )
 }
