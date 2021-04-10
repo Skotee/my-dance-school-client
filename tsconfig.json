@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "tsx": "react-tsx",
+    // "tsx": "react-tsx",
   },
   "include": [
     "src"
