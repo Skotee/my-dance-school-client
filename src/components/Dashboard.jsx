@@ -205,7 +205,7 @@ export default function Dashboard() {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Typography paragraph>
+          <Typography component={'span'} variant={'body2'}>
             <Switch>
             <Route path="/students">
               <Students />

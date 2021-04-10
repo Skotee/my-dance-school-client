@@ -29,10 +29,14 @@ const Input = styled.input`
 	margin-bottom: 0.5em;
 `;
 
-const Message = styled.label`
-	margin-bottom: 0.5em;
+const Select = styled.select`
+	margin-bottom: 0.5em; 
+  margin: auto;
 	color: palevioletred;
     display: block;
+`;
+const Option = styled.option`
+  
 `;
 const Radio = styled.input`
 	margin-bottom: 0.5em;
@@ -55,11 +59,13 @@ const RegisterUser = () => {
       <h1>Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input type="text" placeholder="First name" {...register('FirstName', {required: true, maxLength: 80})} />
+        {errors.FirstName && <span>First Name is required</span>}
         <Input type="text" placeholder="Last name" {...register('LastName', {required: true, maxLength: 100})} />
+        {errors.LastName && <span>Last Name is required</span>}
         <Input type="text" placeholder="Email" {...register('Email', {required: true, pattern: /^\S+@\S+$/i})} />
-        {errors.Email && <span>Check if your email is correct!</span>}
-        <Input type="tel" placeholder="Mobile number" {...register('Mobile number', {required: true, minLength: 6, maxLength: 12})} />
-        
+        {errors.Email && <span>Correct Email is required</span>}
+        <Input type="tel" placeholder="Mobile number" {...register('MobileNumber', {required: true, minLength: 6, maxLength: 12})} />
+        {errors.MobileNumber && <span>Mobile Number is required</span>}
         <Input type="password" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
         {errors.Password && <span>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</span>}
         <RadioButtons>
@@ -70,10 +76,10 @@ const RegisterUser = () => {
           <Label>Other</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Other" />
         </RadioButtons>
-        <select {...register('Role', { required: true })}>
-        <option value="Student">Student</option>
-        <option value="Teacher">Teacher</option>
-        </select>
+        <Select {...register('Role', { required: true })}>
+        <Option value="Student">Student</Option>
+        <Option value="Teacher">Teacher</Option>
+        </Select>
         <Input type="submit" />
       </form>
     </FormGroup>
