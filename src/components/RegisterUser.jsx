@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable semi */
-import React from 'react'
-import { useForm } from 'react-hook-form'
+
+import React, {useRef}from 'react'
+import { useForm} from 'react-hook-form'
 import styled from 'styled-components'
 
 const FormGroup = styled.div`
@@ -44,15 +45,23 @@ const RadioButtons = styled.div`
 `;
 const RegisterUser = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data)
+  
+  const onSubmit = async data => {
+    alert(JSON.stringify(data));
+  };
   
   return (
     <FormGroup className="">
+      <h1>Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="First name" {...register('First name', {required: true, maxLength: 80})} />
-        <Input type="text" placeholder="Last name" {...register('Last name', {required: true, maxLength: 100})} />
+        <Input type="text" placeholder="First name" {...register('FirstName', {required: true, maxLength: 80})} />
+        <Input type="text" placeholder="Last name" {...register('LastName', {required: true, maxLength: 100})} />
         <Input type="text" placeholder="Email" {...register('Email', {required: true, pattern: /^\S+@\S+$/i})} />
+        {errors.Email && <span>Check if your email is correct!</span>}
         <Input type="tel" placeholder="Mobile number" {...register('Mobile number', {required: true, minLength: 6, maxLength: 12})} />
+        
+        <Input type="password" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
+        {errors.Password && <span>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</span>}
         <RadioButtons>
           <Label>Male</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Male" />
@@ -61,6 +70,10 @@ const RegisterUser = () => {
           <Label>Other</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Other" />
         </RadioButtons>
+        <select {...register('Role', { required: true })}>
+        <option value="Student">Student</option>
+        <option value="Teacher">Teacher</option>
+        </select>
         <Input type="submit" />
       </form>
     </FormGroup>
