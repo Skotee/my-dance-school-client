@@ -8,6 +8,7 @@ import styled from 'styled-components'
 const FormGroup = styled.div`
 	color: palevioletred;
     display: block;
+  font-size:1.8rem;
 	width: 300px;
 	margin: 50px auto;
 `;
@@ -66,15 +67,15 @@ const RegisterUser = () => {
         {errors.Email && <span>Correct Email is required</span>}
         <Input type="tel" placeholder="Mobile number" {...register('MobileNumber', {required: true, minLength: 6, maxLength: 12})} />
         {errors.MobileNumber && <span>Mobile Number is required</span>}
-        <Input type="password" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
+        <Input type="text" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
         {errors.Password && <span>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</span>}
         <RadioButtons>
           <Label>Male</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Male" />
           <Label>Female</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Female" />
-          <Label>Other</Label>
-          <Radio {...register('GenderRadio', { required: true })}type="radio" value="Other" />
+          {/*<Label>Other</Label>
+          <Radio {...register('GenderRadio', { required: true })}type="radio" value="Other" />*/}
         </RadioButtons>
         <Select {...register('Role', { required: true })}>
         <Option value="Student">Student</Option>
