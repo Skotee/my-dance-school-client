@@ -67,7 +67,7 @@ const RegisterUser = () => {
         {errors.Email && <span>Correct Email is required</span>}
         <Input type="tel" placeholder="Mobile number" {...register('MobileNumber', {required: true, minLength: 6, maxLength: 12})} />
         {errors.MobileNumber && <span>Mobile Number is required</span>}
-        <Input type="text" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
+        <Input type="password" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
         {errors.Password && <span>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</span>}
         <RadioButtons>
           <Label>Male</Label>
