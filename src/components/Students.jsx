@@ -257,19 +257,18 @@ const Students = () => {
   )
 
   const [data, setData] = useState([])
-  const [loadingData, setLoadingData] = useState(true)
  
   useEffect(() => {
 
     async function getStudents() {
 
       let people = []
-      await axios.get('http://localhost:3000/users').then(students => {
+      await axios.get('http://localhost:3000/users',).then(students => {
         people = students.data
         students.data.forEach(async (person, index) => {
           await axios.get('http://localhost:3000/phones/users/'.concat(person._id.toString()))
           .then(phone => {
-            people[index].phoneNumber = phone.data[index].phoneNumber
+            people[index].phoneNumber = phone.data[0].phoneNumber
             setData(people)
           })
         })
@@ -277,7 +276,6 @@ const Students = () => {
     }
       getStudents()
       
-
   }, [])
 
   return (

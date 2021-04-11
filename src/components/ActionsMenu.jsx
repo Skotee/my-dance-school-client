@@ -53,13 +53,15 @@ export default function ActionsMenu() {
     setAnchorEl(null)
   }
 
+  const handleDelete = (event) => {
+    console.log(event)
+  } 
+
   return (
     <div style={{ textAlign: 'center'}}>
       <Button style={{ width: '100%'}}
         aria-controls="customized-menu"
         aria-haspopup="true"
-       // variant="contained"
-      //  / color="primary"
         onClick={handleClick}
       >
        <MoreVertIcon />
@@ -77,7 +79,7 @@ export default function ActionsMenu() {
           </ListItemIcon>
           <ListItemText primary="Edytuj dane" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem onClick={handleDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
