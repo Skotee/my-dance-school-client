@@ -25,7 +25,7 @@ import {
 } from 'react-router-dom'
 import Link from '@material-ui/core/Link'
 
-import Students from './Students.tsx'
+import Students from './Students.jsx'
 import Groups from './Groups.jsx'
 
 const drawerWidth = 300

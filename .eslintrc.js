@@ -39,7 +39,7 @@ module.exports = {
 			'error',
 			'never'
 		],
-		'max-len': ['error', { code: 100 }],
+		'max-len': ['error', { code: 1000 }],
 		'global-require': 'off',
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
@@ -64,7 +64,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': [1],
     '@typescript-eslint/no-namespace': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
+    //'no-shadow': 'off',
+    //'@typescript-eslint/no-shadow': ['error'],
 	}
 }
