@@ -61,11 +61,10 @@ export default function CreatePass() {
         <form onSubmit={handleSubmit(onSubmit)}>
         <Input type="text" placeholder="UserID" {...register('UserID', {required: true})} />
         <Input type="text" placeholder="GroupID" {...register('GroupID', {required: true})} />
-        <Select {...register('Group', { required: true })}>
+        <Select {...register('PassType', { required: true })}>
+            <Option value="Open">Open</Option>
+            <Option value="WCS">WCS</Option>
             <Option value="Salsa">Salsa</Option>
-            <Option value="Tango">Tango</Option>
-            <Option value="Idk">Idk</Option>
-            <Option value="cosJeszcze">cosJeszcze</Option>
         </Select>
         <Input type="date" placeholder="StartDate" {...register('StartDate', {required: true})} />
         <Input type="date" placeholder="EndDate" {...register('EndDate', {required: true})} />
