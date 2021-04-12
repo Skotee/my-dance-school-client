@@ -1,22 +1,11 @@
 /* eslint-disable semi */
 /* eslint-disable max-len */
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import Select from 'react-select';
-import { colourOptions } from './data';
+import MultiSelect from 'react-multi-select-component';
 
-const Idk = () => (
-  <Select
-    defaultValue={[colourOptions[2], colourOptions[3]]}
-    isMulti
-    name="colors"
-    options={colourOptions}
-    className="basic-multi-select"
-    classNamePrefix="select"
 
-  />
-);
 
 const FormGroup = styled.div`
 	color: palevioletred;
@@ -65,8 +54,22 @@ const RadioButtons = styled.div`
 
 export default function CreateGroup() {
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const onSubmit = data => console.log(data)
-  console.log(errors)
+  const [teachers, setTeachers] = useState([]);
+  const [students, setStudents] = useState([]);
+  const onSubmit = async data => {
+    data.TeacherList = teachers;
+    data.StudentList = students;
+    console.log(JSON.stringify(data));
+    alert(JSON.stringify(data));
+  };
+  const people = [
+    { label: 'Jan Kowalski', value: '1233422424244' },
+    { label: 'Jan Nowak', value: '23232323232332' },
+    { label: 'Jan Kowalski', value: '12334224224244' },
+    { label: 'Jan Kowalski', value: '12334224424244' },
+    { label: 'Jan Kowalski', value: '12334224524244' }
+
+  ];
   
   return (
     <FormGroup>
@@ -84,23 +87,30 @@ export default function CreateGroup() {
         </select>
         <Input type="number" placeholder="MaxAmount" {...register('MaxAmount', {required: true, min: 0})} />
         <Input type="datetime-local" placeholder="Scheudle" {...register} />
-
+        <div>
+          <h4>Dodaj Nauczycieli</h4>
+          <pre>{JSON.stringify(teachers)}</pre>
+          <MultiSelect
+            options={people}
+            value={teachers}
+            onChange={setTeachers}
+            labelledBy="Select"
+          />
+        </div>
+        <div>
+          <h4>Dodaj Studentów</h4>
+          <pre>{JSON.stringify(students)}</pre>
+          <MultiSelect
+            options={people}
+            value={students}
+            onChange={setStudents}
+            labelledBy="Select"
+          />
+        </div>
         <Input type="submit" />
         
         </form>
-        <form action="">
-        <Select
-          defaultValue={[colourOptions[2], colourOptions[3]]}
-          isMulti
-          name="colors"
-          options={colourOptions}
-          getOptionValue={options => options}
-          className="basic-multi-select"
-          classNamePrefix="select"
-          
-        />
-        <button onClick={() => options.value}>sdddddddddd</button>
-        </form>
+        
     </FormGroup>
   )
 }
