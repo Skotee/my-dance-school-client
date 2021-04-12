@@ -59,15 +59,15 @@ export default function CreatePass() {
   return (
     <FormGroup>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="UserID" {...register('UserID', {required: true})} />
+        <Input type="text" placeholder="UserName" {...register('UserName', {required: true})} />
         <Select {...register('Group', { required: true })}>
             <Option value="Salsa">Salsa</Option>
             <Option value="Tango">Tango</Option>
             <Option value="Idk">Idk</Option>
             <Option value="cosJeszcze">cosJeszcze</Option>
         </Select>
-        <Input type="datetime-local" placeholder="StartDate" {...register('StartDate', {required: true})} />
-        <Input type="datetime-local" placeholder="EndDate" {...register('EndDate', {required: true})} />
+        <Input type="date" placeholder="StartDate" {...register('StartDate', {required: true})} />
+        <Input type="date" placeholder="EndDate" {...register('EndDate', {required: true})} />
         <Input type="number" placeholder="Price" {...register('Price', {required: true, min: 0})} />
         <Input type="number" placeholder="RemainingNumber" {...register('RemainingNumber', {required: true,min: 0})} />
         
