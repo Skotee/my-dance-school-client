@@ -66,15 +66,11 @@ export default function CreatePass() {
             <Option value="Idk">Idk</Option>
             <Option value="cosJeszcze">cosJeszcze</Option>
         </Select>
-        <Input type="datetime-local" placeholder="StartDate" {...register} />
-        <Input type="datetime-local" placeholder="EndDate" {...register} />
+        <Input type="datetime-local" placeholder="StartDate" {...register('StartDate', {required: true})} />
+        <Input type="datetime-local" placeholder="EndDate" {...register('EndDate', {required: true})} />
         <Input type="number" placeholder="Price" {...register('Price', {required: true, min: 0})} />
         <Input type="number" placeholder="RemainingNumber" {...register('RemainingNumber', {required: true,min: 0})} />
-        <Select {...register('Type', { required: true })}>
-            <Option value="idk">idk</Option>
-            <Option value="asdds">asdds</Option>
-            <Option value="xdxdddsds">xdxdddsds</Option>
-        </Select>
+        
         <Input type="submit" />
         </form>
     </FormGroup>
