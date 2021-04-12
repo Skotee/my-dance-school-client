@@ -59,7 +59,8 @@ export default function CreatePass() {
   return (
     <FormGroup>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="UserName" {...register('UserName', {required: true})} />
+        <Input type="text" placeholder="UserID" {...register('UserID', {required: true})} />
+        <Input type="text" placeholder="GroupID" {...register('GroupID', {required: true})} />
         <Select {...register('Group', { required: true })}>
             <Option value="Salsa">Salsa</Option>
             <Option value="Tango">Tango</Option>
