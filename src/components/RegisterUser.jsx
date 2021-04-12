@@ -70,7 +70,7 @@ const RegisterUser = () => {
         <Input type="password" placeholder="Password" {...register('Password', {required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i})} />
         {errors.Password && <span>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</span>}
         <RadioButtons>
-          <Label>Male</Label>
+          <Label>Male</Label>ssssss
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Male" />
           <Label>Female</Label>
           <Radio {...register('GenderRadio', { required: true })}type="radio" value="Female" />
