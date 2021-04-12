@@ -1,7 +1,22 @@
+/* eslint-disable semi */
 /* eslint-disable max-len */
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import Select from 'react-select';
+import { colourOptions } from './data';
+
+const Idk = () => (
+  <Select
+    defaultValue={[colourOptions[2], colourOptions[3]]}
+    isMulti
+    name="colors"
+    options={colourOptions}
+    className="basic-multi-select"
+    classNamePrefix="select"
+
+  />
+);
 
 const FormGroup = styled.div`
 	color: palevioletred;
@@ -28,12 +43,12 @@ const Input = styled.input`
 	margin-bottom: 0.5em;
 `
 
-const Select = styled.select`
-	margin-bottom: 0.5em; 
-  margin: auto;
-	color: palevioletred;
-    display: block;
-`
+// const Select = styled.select`
+// 	margin-bottom: 0.5em; 
+//   margin: auto;
+// 	color: palevioletred;
+//     display: block;
+// `
 const Option = styled.option`
   
 `
@@ -47,6 +62,7 @@ const RadioButtons = styled.div`
   justify-content:space-between;
 `
 
+
 export default function CreateGroup() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = data => console.log(data)
@@ -55,22 +71,35 @@ export default function CreateGroup() {
   return (
     <FormGroup>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="GroupName" {...register} />
-        <Select {...register('DanceType', { required: true })}>
+        <select {...register('DanceType', { required: true })}>
             <Option value="Salsa">Salsa</Option>
             <Option value="Tango">Tango</Option>
             <Option value="Idk">Idk</Option>
             <Option value="cosJeszcze">cosJeszcze</Option>
-        </Select>
-        <Select {...register('AdvanceLevel', { required: true })}>
+        </select>
+        <select {...register('AdvanceLevel', { required: true })}>
             <Option value="poczatkujacy">poczatkujacy</Option>
             <Option value="sr Zaawansowny">sr Zaawansowny</Option>
             <Option value=" zaawansownay"> zaawansownay</Option>
-        </Select>
+        </select>
         <Input type="number" placeholder="MaxAmount" {...register('MaxAmount', {required: true, min: 0})} />
         <Input type="datetime-local" placeholder="Scheudle" {...register} />
 
         <Input type="submit" />
+        
+        </form>
+        <form action="">
+        <Select
+          defaultValue={[colourOptions[2], colourOptions[3]]}
+          isMulti
+          name="colors"
+          options={colourOptions}
+          getOptionValue={options => options}
+          className="basic-multi-select"
+          classNamePrefix="select"
+          
+        />
+        <button onClick={() => options.value}>sdddddddddd</button>
         </form>
     </FormGroup>
   )
