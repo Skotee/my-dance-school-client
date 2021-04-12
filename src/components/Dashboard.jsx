@@ -29,6 +29,8 @@ import Link from '@material-ui/core/Link'
 import Students from './Students.jsx'
 import Groups from './Groups.jsx'
 import RegisterUser from './RegisterUser.jsx'
+import CreateGroup from './CreateGroup.jsx'
+
 const drawerWidth = 300
 
 const useStyles = makeStyles((theme) =>
@@ -196,6 +198,20 @@ export default function Dashboard() {
               </ListItemText>
             </ListItem>
 
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/createGroup"
+                  >
+                    Utwórz Grupe
+                  </Link>
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
         </Drawer>
@@ -215,6 +231,9 @@ export default function Dashboard() {
             </Route>
             <Route path="/registerUser">
               <RegisterUser />
+            </Route>
+            <Route path="/createGroup">
+              <CreateGroup />
             </Route>
           </Switch>
           </Typography>
