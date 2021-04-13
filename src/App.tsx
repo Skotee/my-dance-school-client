@@ -5,6 +5,7 @@ import './App.css'
 import Dashboard from './components/Dashboard.jsx'
 import Login from './screens/Login.jsx'
 
+
 function App() {
   const [isAuthed, setIsAuthed] = useState(false)
 
@@ -71,8 +72,8 @@ function App() {
 
   return (
     <div className="App">
-    <Login />
-  </div>
+      <Dashboard /> 
+    </div>
   )
 }
 
