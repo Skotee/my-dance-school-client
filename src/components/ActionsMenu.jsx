@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
@@ -10,6 +10,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreditCardIcon from '@material-ui/icons/CreditCard'
+import axios from 'axios'
 
 const StyledMenu = withStyles({
   paper: {
@@ -42,7 +43,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem)
 
-export default function ActionsMenu() {
+export default function ActionsMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = (event) => {
@@ -54,7 +55,9 @@ export default function ActionsMenu() {
   }
 
   const handleDelete = (event) => {
-    console.log(event)
+    axios.delete('http://localhost:3000/users/' + props.id._id)
+    window.location.reload()
+    return false
   } 
 
   return (

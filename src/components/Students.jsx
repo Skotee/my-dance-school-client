@@ -174,12 +174,12 @@ function Students() {
                 accessor: 'actions',
                 minWidth: 150,
                 disableFilters: true,
-                Cell: () => <ActionsMenu />
+                Cell: (props) => <ActionsMenu id={data[props.row.index]}/>
               },
         ],
       },
     ],
-    []
+    
   )
 
  const [data, setData] = useState([])
@@ -189,15 +189,9 @@ function Students() {
    async function getStudents() {
 
      let people = []
-     await axios.get('http://localhost:3000/users',).then(students => {
+     await axios.get('http://localhost:3000/users').then(students => {
        people = students.data
-       students.data.forEach(async (person, index) => {
-         await axios.get('http://localhost:3000/phones/users/'.concat(person._id.toString()))
-         .then(phone => {
-           people[index].phoneNumber = phone.data[0].phoneNumber
            setData(people)
-         })
-       })
      })      
    }
      getStudents()
