@@ -3,6 +3,8 @@ import { Grid, InputAdornment, TextField } from '@material-ui/core'
 import { AccountCircle, LockRounded } from '@material-ui/icons'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
+
 
 const moveInLeft = keyframes`
   0% {
@@ -48,12 +50,14 @@ const Input = styled.input`
 	margin-bottom: 0.5em;
 `
 
+
 const LoginScreen = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = async data => {
     alert(JSON.stringify(data))
   }
-  
+
+
   return (
     <StyledGrid 
       container 
@@ -74,7 +78,7 @@ const LoginScreen = () => {
                 </InputAdornment>
               ),
             }}
-            {...register('Email', {required: true, pattern: /^\S+@\S+$/i})} 
+            {...register('mail', {required: true, pattern: /^\S+@\S+$/i})} 
           />
           {errors.Email && <span>Wymagany jest prawidłowy format adresu e-mail</span>}
 
@@ -89,7 +93,7 @@ const LoginScreen = () => {
                 </InputAdornment>
               ),
             }}
-            {...register('Password',  {required: true, minLength: 8})} 
+            {...register('password',  {required: true, minLength: 8})} 
           />
           {errors.Password && <span>Hasło jest wymagane</span>}
           <Input type="submit" />
