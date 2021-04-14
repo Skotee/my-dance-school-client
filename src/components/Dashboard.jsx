@@ -27,6 +27,7 @@ import Link from '@material-ui/core/Link'
 
 import Students from './Students.jsx'
 import Groups from './Groups.jsx'
+import Contact from './Contact.jsx'
 
 const drawerWidth = 300
 
@@ -96,7 +97,7 @@ const useStyles = makeStyles((theme) =>
   }),
 )
 
-export default function Dashboard() {
+export default function Dashboard({children}) {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
@@ -132,6 +133,7 @@ export default function Dashboard() {
             <Typography variant="h6" noWrap>
               Moja szkoła tańca
             </Typography>
+            {children}
           </Toolbar>
         </AppBar>
         
@@ -178,6 +180,19 @@ export default function Dashboard() {
                 </Link>
               </ListItemText>
             </ListItem>
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <GroupIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/contact">
+                    Formularz kontaktowy
+                </Link>
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
         </Drawer>
@@ -194,6 +209,9 @@ export default function Dashboard() {
             </Route>
             <Route path="/groups">
               <Groups />
+            </Route>
+            <Route path="/contact">
+              <Contact />
             </Route>
           </Switch>
           </Typography>
