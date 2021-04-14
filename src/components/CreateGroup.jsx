@@ -92,10 +92,11 @@ export default function CreateGroup() {
         <h1>Utwórz Grupę</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
         <select {...register('danceType', { required: true })}>
-            <Option value="Salsa">Salsa</Option>
-            <Option value="Tango">Tango</Option>
-            <Option value="Idk">Idk</Option>
-            <Option value="cosJeszcze">cosJeszcze</Option>
+            <Option value="salsa">Salsa</Option>
+            <Option value="tango">Tango</Option>
+            <Option value="westcoastswing ">WestCoastSwing </Option>
+            <Option value="zouk">Zouk</Option>
+            <Option value="discofox">Discofox</Option>
         </select>
         <select {...register('advanceLevel', { required: true })}>
             <Option value="p1a">p1a</Option>
