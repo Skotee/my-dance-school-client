@@ -206,6 +206,21 @@ export default function Dashboard({children}) {
                 <Link 
                   className={classes.link} 
                   component={RouterLink} 
+                  to="/createGroup"
+                  >
+                    Utwórz Grupe
+                  </Link>
+              </ListItemText>
+            </ListItem>
+
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
                   to="/createPass"
                   >
                     Utwórz Karnet
@@ -231,6 +246,9 @@ export default function Dashboard({children}) {
             </Route>
             <Route path="/registerUser">
               <RegisterUser />
+            </Route>
+            <Route path="/createGroup">
+              <CreateGroup />
             </Route>
             <Route path="/createPass">
               <CreatePass />
