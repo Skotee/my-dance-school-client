@@ -5,14 +5,17 @@ import './App.css'
 import Dashboard from './components/Dashboard.jsx'
 import Login from './screens/Login.jsx'
 
-const URL_AUTH = 'http://localhost:3000/auth'
-const URL_AUTH_LOGOUT = 'http://localhost:3000/auth/logout'
+const URL_AUTH_LOGOUT_LOCAL = 'http://localhost:3000/auth/logout'
+const URL_AUTH_LOGOUT_PROD = 'https://dance-school-management-system.herokuapp.com/auth/logout'
+
+const URL_AUTH_LOCAL = 'http://localhost:3000/auth'
+const URL_AUTH_PROD = 'https://dance-school-management-system.herokuapp.com/auth'
 
 function App() {
   const [userData, setUserData] = useState(null)
 
   const auth = async () => {
-    axios.get(URL_AUTH, { withCredentials: true })
+    axios.get(URL_AUTH_PROD, { withCredentials: true })
     .then(function (response) {
       console.log('zalogowany')
       console.log('response', response.status)
@@ -23,7 +26,7 @@ function App() {
   }
   
   const logout = async () => {
-    axios.post(URL_AUTH_LOGOUT, {}, { withCredentials: true })
+    axios.post(URL_AUTH_LOGOUT_PROD, {}, { withCredentials: true })
     .then(function (response) {
       console.log('logout')
       console.log('response', response)
@@ -39,11 +42,10 @@ function App() {
 
   return (
     <div className="App">
-      {/* {userData !== null ? 
+      {userData !== null ? 
       <Dashboard>
         <button onClick={logout}>Logout</button>
-      </Dashboard> : <Login setUserData={setUserData} /> } */}
-      <Dashboard><button onClick={logout}>Logout</button></Dashboard>
+      </Dashboard> : <Login setUserData={setUserData} /> }
     </div>
   )
 }
