@@ -1,16 +1,16 @@
 /* eslint-disable semi */
 /* eslint-disable max-len */
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import MultiSelect from 'react-multi-select-component';
-
+import axios from 'axios'
 
 
 const FormGroup = styled.div`
 	color: palevioletred;
     display: block;
-  font-size:1.8rem;
+  font-size:1.2rem;
 	width: 300px;
 	margin: 50px auto;
 `
@@ -50,59 +50,89 @@ const RadioButtons = styled.div`
   display:flex;
   justify-content:space-between;
 `
-
+const createOption = person => {
+  return {
+    label: `${person.name} ${person.surname}`,
+    value: person._id
+  }
+}
 
 export default function CreateGroup() {
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const [teachers, setTeachers] = useState([]);
-  const [students, setStudents] = useState([]);
+  const [teachersState, setTeachers] = useState([]);
+  const [studentsState, setStudents] = useState([]);
+  const [teachersOptions, setTeachersOptions] = useState([]);
+  const [studentsOptions, setStudentsOptions] = useState([]);
   const onSubmit = async data => {
-    data.TeacherList = teachers;
-    data.StudentList = students;
-    console.log(JSON.stringify(data));
-    alert(JSON.stringify(data));
+    data.teachers = teachersState.map(p =>p.value);
+    data.students = studentsState.map(p =>p.value);
+    
+    const local = 'http://localhost:3000'
+    const heroku = 'https://dance-school-management-system.herokuapp.com'
+    axios.post(`${heroku}/groups`,
+      data
+    )
+    alert('grupa została utworzona')
   };
-  const people = [
-    { label: 'Jan Kowalski', value: '1233422424244' },
-    { label: 'Jan Nowak', value: '23232323232332' },
-    { label: 'Jan Kowalski', value: '12334224224244' },
-    { label: 'Jan Kowalski', value: '12334224424244' },
-    { label: 'Jan Kowalski', value: '12334224524244' }
+  useEffect(() => {
+    const getPeople = axios.get('https://dance-school-management-system.herokuapp.com/users').then(function (response){
+      console.log(response.data)
+      const teachers = response.data.filter(person=>person.role.includes('teacher')).map(createOption)
+      const students = response.data.filter(person=>person.role.includes('student')).map(createOption)
+      setTeachersOptions(teachers);
+      setStudentsOptions(students);
+      // console.log({people})
+    })
+  }, [])
+  
+  // const people = [
+  //   { label: 'Jan Kowalski', value: '1233422424244' },
+  //   { label: 'Jan Nowak', value: '23232323232332' },
+  //   { label: 'Jan Kowalski', value: '12334224224244' },
+  //   { label: 'Jan Kowalski', value: '12334224424244' },
+  //   { label: 'Jan Kowalski', value: '12334224524244' }
 
-  ];
+  // ];
   
   return (
     <FormGroup>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register('DanceType', { required: true })}>
+        <select {...register('danceType', { required: true })}>
             <Option value="Salsa">Salsa</Option>
             <Option value="Tango">Tango</Option>
             <Option value="Idk">Idk</Option>
             <Option value="cosJeszcze">cosJeszcze</Option>
         </select>
-        <select {...register('AdvanceLevel', { required: true })}>
-            <Option value="poczatkujacy">poczatkujacy</Option>
-            <Option value="sr Zaawansowny">sr Zaawansowny</Option>
-            <Option value=" zaawansownay"> zaawansownay</Option>
+        <select {...register('advanceLevel', { required: true })}>
+            <Option value="p1a">p1a</Option>
+            <Option value="p1b">p1b</Option>
+            <Option value="p1c">p1c</Option>
+            <Option value="p2a">p2a</Option>
+            <Option value="p2b">p2b</Option>
+            <Option value="p2c">p2c</Option>
+            <Option value="p2c">p2c</Option>
+            <Option value="p3a">p3a</Option>
+            <Option value="p3b">p3b</Option>
+            <Option value="p3c">p3c</Option>
         </select>
-        <Input type="number" placeholder="MaxAmount" {...register('MaxAmount', {required: true, min: 0})} />
-        <Input type="datetime-local" placeholder="Scheudle" {...register} />
+        <Input type="number" placeholder="maxAmount" {...register('maxAmount', {required: true, min: 0})} />
+        
         <div>
           <h4>Dodaj Nauczycieli</h4>
-          <pre>{JSON.stringify(teachers)}</pre>
+          <pre>{teachersState.map(p =>`${p.label}, `)}</pre>
           <MultiSelect
-            options={people}
-            value={teachers}
+            options={teachersOptions}
+            value={teachersState}
             onChange={setTeachers}
             labelledBy="Select"
           />
         </div>
         <div>
           <h4>Dodaj Studentów</h4>
-          <pre>{JSON.stringify(students)}</pre>
+          <pre>{studentsState.map(p =>`${p.label}, `)}</pre>
           <MultiSelect
-            options={people}
-            value={students}
+            options={studentsOptions}
+            value={studentsState}
             onChange={setStudents}
             labelledBy="Select"
           />
