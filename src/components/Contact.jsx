@@ -38,7 +38,7 @@ const Contact = () => {
   }
 
   const showInstructors = () => {
-    axios.get('http://localhost:8010/proxy/users')
+    axios.get('https://dance-school-management-system.herokuapp.com/users')
     .then(response => {
       let users = response.data
       let teachersNames = []
@@ -56,7 +56,7 @@ const Contact = () => {
   } 
 
   const showStudents = () => {
-    axios.get('http://localhost:8010/proxy/users')
+    axios.get('https://dance-school-management-system.herokuapp.com/users')
     .then(response => {
       let users = response.data
       let studentsNames = []
@@ -74,13 +74,15 @@ const Contact = () => {
   } 
 
   const showGroups = () => {
-    axios.get('http://localhost:8010/proxy/groups')
+    axios.get('https://dance-school-management-system.herokuapp.com/groups')
     .then(response => {
       let groups = response.data
       let groupsNames = []
       for(let i = 0; i < groups.length; i++) {
+        if(groups[i].danceType != undefined && groups[i].advanceLevel != undefined ) {
           groupsNames.push(groups[i].danceType + '-' + 
           groups[i].advanceLevel)
+        }   
     }
     
       setChoose(groupsNames)
