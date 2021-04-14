@@ -28,18 +28,18 @@ module.exports = {
 	],
 	'rules': {
 		'linebreak-style': [
-			'warning',
+			'warn',
 			'windows'
 		],
 		'quotes': [
-			'warning',
+			'warn',
 			'single'
 		],
 		'semi': [
-			'warning',
+			'warn',
 			'never'
 		],
-		'max-len': ['warning', { code: 100 }],
+		'max-len': ['warn', { code: 100 }],
 		'global-require': 'off',
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
