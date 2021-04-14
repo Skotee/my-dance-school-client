@@ -31,6 +31,8 @@ import Groups from './Groups.jsx'
 import CreateGroup from './CreateGroup.jsx'
 import RegisterUser from './RegisterUser.jsx'
 import CreatePass from './CreatePass.jsx'
+import Contact from './Contact.jsx'
+
 
 const drawerWidth = 300
 
@@ -185,7 +187,7 @@ export default function Dashboard({children}) {
             </ListItem>
             <ListItem button >
               <ListItemIcon className={classes.listItemIcon}> 
-                <PermIdentityIcon /> 
+                <GroupIcon /> 
               </ListItemIcon>
               <ListItemText>
                 <Link 
@@ -252,6 +254,9 @@ export default function Dashboard({children}) {
             </Route>
             <Route path="/createPass">
               <CreatePass />
+            </Route>
+            <Route path="/contact">
+              <Contact />
             </Route>
           </Switch>
           </Typography>
