@@ -64,7 +64,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': [1],
     '@typescript-eslint/no-namespace': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
+    //'no-shadow': 'off',
+    //'@typescript-eslint/no-shadow': ['error'],
 	}
 }
