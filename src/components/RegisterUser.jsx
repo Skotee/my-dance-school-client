@@ -5,6 +5,8 @@ import React, {useRef} from 'react'
 import {useForm} from 'react-hook-form'
 import styled from 'styled-components'
 import axios from 'axios';
+import swal from 'sweetalert'
+
 
 const FormGroup = styled.div`
   color: palevioletred;
@@ -53,9 +55,15 @@ const RegisterUser = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     const onSubmit = async data => {
-        await axios.post('http://localhost:3000/users',
+        await axios.post('https://dance-school-management-system.herokuapp.com/users',
             data
         )
+        swal({
+          title: 'Good job!',
+          text: `stworzyłeś użytkownika ${data.name}!`,
+          icon: 'success',
+          button: 'Ok!',
+        });
     };
 
     return (
