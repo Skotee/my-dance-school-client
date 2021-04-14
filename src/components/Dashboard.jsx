@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import GroupIcon from '@material-ui/icons/Group'
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople'
+import PermIdentityIcon from '@material-ui/icons/PermIdentity'
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,7 +28,7 @@ import Link from '@material-ui/core/Link'
 
 import Students from './Students.jsx'
 import Groups from './Groups.jsx'
-
+import RegisterUser from './RegisterUser.jsx'
 const drawerWidth = 300
 
 const useStyles = makeStyles((theme) =>
@@ -178,6 +179,23 @@ export default function Dashboard() {
                 </Link>
               </ListItemText>
             </ListItem>
+
+            {/*list item do rejestracji uzytkownika tymczasowy*/}
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/registerUser"
+                  >
+                    Rejestracja
+                  </Link>
+              </ListItemText>
+            </ListItem>
+
           </List>
           <Divider />
         </Drawer>
@@ -187,13 +205,16 @@ export default function Dashboard() {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Typography paragraph>
+          <Typography component={'span'} variant={'body2'}>
             <Switch>
             <Route path="/students">
               <Students />
             </Route>
             <Route path="/groups">
               <Groups />
+            </Route>
+            <Route path="/registerUser">
+              <RegisterUser />
             </Route>
           </Switch>
           </Typography>
