@@ -6,87 +6,138 @@ import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { InputLabel } from '@material-ui/core'
-
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '50vw',
-        
-      }
-    },
-    
-    button: {
-        width: '15vw',
-        display: 'block',
-        margin: '0 auto', 
-        marginTop: '20px',
-    }, 
-  }))
-
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '50vw',
+    }
+  },
+  button: {
+    width: '15vw',
+    display: 'block',
+    margin: '0 auto', 
+    marginTop: '20px',
+  }, 
+}))
 
 const Contact = () => {
-    const classes = useStyles()
-    const [user, setUser] = React.useState('')
+  const classes = useStyles()
+  let [choose, setChoose] = React.useState([])
 
-    const handleChange = (event) => {
-        setUser(event.target.value)
+  const selectGroup = (event) => {
+    if(event.target.value === 10) {
+      showInstructors()
+    } else if (event.target.value === 20) {
+      showStudents()
+    } else if (event.target.value === 30) {
+      showGroups()
+    }
+  }
+
+  const showInstructors = () => {
+    axios.get('http://localhost:8010/proxy/users')
+    .then(response => {
+      let users = response.data
+      let teachersNames = []
+      for(let i = 0; i < users.length; i++) {
+        for(let j = 0; j < users[i].role.length; j++) {
+          if(users[i].role[j] ==='teacher') {
+            teachersNames.push(users[i].name + ' ' + users[i].surname)
+          }
+        }
       }
+      setChoose(teachersNames)
+    }).catch(error => {
+    console.log('error', error)
+    })    
+  } 
 
-  return (
-    <div>
-      <h1>Kontakt</h1>
-        <form className={classes.root} noValidate autoComplete="off">
-            <FormControl variant="outlined">
-                <InputLabel id="demo-simple-select-outlined-label">
-                 Wybierz do kogo chcesz napisać wiadomość</InputLabel>
-                <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={user}
-                    onChange={handleChange}
-                    label="Wybierz do kogo chcesz napisać wiadomość"
-                    >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Do kursanta</MenuItem>
-                    <MenuItem value={20}>Do instruktora</MenuItem>
-                    <MenuItem value={30}>Do wszystkich członków danej grupy</MenuItem>
-                 </Select>
-            </FormControl>
+  const showStudents = () => {
+    axios.get('http://localhost:8010/proxy/users')
+    .then(response => {
+      let users = response.data
+      let studentsNames = []
+      for(let i = 0; i < users.length; i++) {
+        for(let j = 0; j < users[i].role.length; j++) {
+          if(users[i].role[j] ==='student') {
+            studentsNames.push(users[i].name + ' ' + users[i].surname)
+          }
+        }
+      }
+      setChoose(studentsNames)
+    }).catch(error => {
+    console.log('error', error)
+    })   
+  } 
 
-            <FormControl variant="outlined">
-                <InputLabel id="demo-simple-select-outlined-label">
-                 Wybierz nazwisko/grupę</InputLabel>
-                <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={user}
-                    onChange={handleChange}
-                    label="Wybierz nazwisko/grupę"
-                    >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Grupa p1</MenuItem>
-                    <MenuItem value={20}>Grupa z3</MenuItem>
-                    <MenuItem value={30}>Grupa s1</MenuItem>
-                </Select>
-            </FormControl> 
+  const showGroups = () => {
+    axios.get('http://localhost:8010/proxy/groups')
+    .then(response => {
+      let groups = response.data
+      let groupsNames = []
+      for(let i = 0; i < groups.length; i++) {
+          groupsNames.push(groups[i].danceType + '-' + 
+          groups[i].advanceLevel)
+    }
+    
+      setChoose(groupsNames)
+    }).catch(error => {
+    console.log('error', error)
+    }) 
+  } 
 
-            <TextField className={classes.text}
-                label="Treść wiadomości" 
-                variant="outlined" 
-                multiline rows={8}
-                required>
-            </TextField>
-            <Button className={classes.button} variant="contained" color="primary">
-                Wyślij
-            </Button>
-        </form>
-    </div>
+return (
+  <div>
+    <h1>Kontakt</h1>
+      <form className={classes.root} noValidate autoComplete="off">
+        <FormControl variant="outlined">
+          <InputLabel id="demo-simple-select-outlined-label">
+            Wybierz do kogo chcesz napisać wiadomość</InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            onChange={selectGroup}
+            label="Wybierz do kogo chcesz napisać wiadomość"
+            >
+            <MenuItem value=""><em>None</em></MenuItem>
+            <MenuItem value={10}>Do instruktora </MenuItem>
+            <MenuItem value={20}>Do kursanta</MenuItem>
+            <MenuItem value={30}>Do wszystkich członków danej grupy</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl variant="outlined">
+          <InputLabel id="demo-simple-select-outlined-label">
+            Wybierz nazwisko/grupę</InputLabel>               
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            label="Wybierz do kogo chcesz napisać wiadomość"
+            >
+            <MenuItem value=""><em>None</em></MenuItem>
+              {
+                choose.map(s => {
+                  return <MenuItem key={s} value={s}> {s} </MenuItem>
+                })
+              }
+          </Select>
+        </FormControl> 
+
+        <TextField className={classes.text}
+          label="Treść wiadomości" 
+          variant="outlined" 
+          multiline rows={8}
+          required>
+        </TextField>
+
+        <Button className={classes.button} variant="contained" color="primary">
+          Wyślij
+        </Button>
+    </form>
+  </div>
   )
 }
 
