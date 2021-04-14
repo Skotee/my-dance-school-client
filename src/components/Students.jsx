@@ -191,14 +191,10 @@ function Students() {
      let people = []
      let groups = []
      await axios.get('http://localhost:3000/users').then(students => {
-       people = students.data
-       console.log(people)
-           
+       people = students.data   
      })      
      await axios.get('http://localhost:3000/groups').then(dance => {
       groups = dance.data
-      console.log(groups)
-          
     })    
 
     for (let i = 0; i < people.length; i++) {
@@ -207,9 +203,7 @@ function Students() {
           people[i].danceType = groups[j].danceType
         }
       }
-
     }
-    console.log(people)
      setData(people)
    }
      getStudents()

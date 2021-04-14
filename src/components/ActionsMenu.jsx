@@ -54,8 +54,17 @@ export default function ActionsMenu(props) {
     setAnchorEl(null)
   }
 
-  const handleDelete = (event) => {
-    axios.delete('http://localhost:3000/users/' + props.id._id)
+    async function handleDelete() {
+    let groups = []
+     await axios.get('http://localhost:3000/groups').then(dance => {
+      groups = dance.data
+    })   
+    for (let i = 0; i < groups.length; i++) {
+      if (groups[i].students[0]._id == props.id._id) {
+        axios.delete('http://localhost:3000/groups/' + groups[i]._id)
+      }
+    }
+    await axios.delete('http://localhost:3000/users/' + props.id._id)
     window.location.reload()
     return false
   } 
