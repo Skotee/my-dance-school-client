@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import GroupIcon from '@material-ui/icons/Group'
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople'
+import PermIdentityIcon from '@material-ui/icons/PermIdentity'
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +28,8 @@ import Link from '@material-ui/core/Link'
 
 import Students from './Students.jsx'
 import Groups from './Groups.jsx'
+import CreateGroup from './CreateGroup.jsx'
+import RegisterUser from './RegisterUser.jsx'
 
 const drawerWidth = 300
 
@@ -179,6 +182,35 @@ export default function Dashboard({children}) {
                 </Link>
               </ListItemText>
             </ListItem>
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/registerUser"
+                  >
+                    Rejestracja
+                  </Link>
+              </ListItemText>
+            </ListItem>
+
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/createGroup"
+                  >
+                    Utwórz Grupe
+                  </Link>
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
         </Drawer>
@@ -188,13 +220,19 @@ export default function Dashboard({children}) {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Typography paragraph>
+          <Typography>
             <Switch>
             <Route path="/students">
               <Students />
             </Route>
             <Route path="/groups">
               <Groups />
+            </Route>
+            <Route path="/registerUser">
+              <RegisterUser />
+            </Route>
+            <Route path="/createGroup">
+              <CreateGroup />
             </Route>
           </Switch>
           </Typography>
