@@ -81,21 +81,15 @@ export default function CreateGroup() {
       const students = response.data.filter(person=>person.role.includes('student')).map(createOption)
       setTeachersOptions(teachers);
       setStudentsOptions(students);
-      // console.log({people})
+     
     })
   }, [])
   
-  // const people = [
-  //   { label: 'Jan Kowalski', value: '1233422424244' },
-  //   { label: 'Jan Nowak', value: '23232323232332' },
-  //   { label: 'Jan Kowalski', value: '12334224224244' },
-  //   { label: 'Jan Kowalski', value: '12334224424244' },
-  //   { label: 'Jan Kowalski', value: '12334224524244' }
 
-  // ];
   
   return (
     <FormGroup>
+        <h1>Utwórz Grupę</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
         <select {...register('danceType', { required: true })}>
             <Option value="Salsa">Salsa</Option>
