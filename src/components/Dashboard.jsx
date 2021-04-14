@@ -252,7 +252,7 @@ export default function Dashboard({children}) {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Typography>
+          <Typography component={'span'} variant={'body2'}>
             <Switch>
             <Route path="/students">
               <Students />
