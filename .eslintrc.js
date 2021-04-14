@@ -35,10 +35,6 @@ module.exports = {
 			'warning',
 			'single'
 		],
-		'semi': [
-			'warning',
-			'never'
-		],
 		'max-len': ['warning', { code: 100 }],
 		'global-require': 'off',
     'comma-dangle': 'off',
