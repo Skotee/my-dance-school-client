@@ -147,7 +147,7 @@ function Students() {
               },
               {
                 Header: 'Grupa zajęciowa',
-                accessor: 'group',
+                accessor: 'danceType',
                 minWidth: 150,
                 Filter: SelectColumnFilter,
                 filter: 'includes',
@@ -189,10 +189,28 @@ function Students() {
    async function getStudents() {
 
      let people = []
+     let groups = []
      await axios.get('http://localhost:3000/users').then(students => {
        people = students.data
-           setData(people)
+       console.log(people)
+           
      })      
+     await axios.get('http://localhost:3000/groups').then(dance => {
+      groups = dance.data
+      console.log(groups)
+          
+    })    
+
+    for (let i = 0; i < people.length; i++) {
+      for (let j = 0; j < groups.length; j++) {
+        if (people[i]._id == groups[j].students[0]._id || people[i]._id == groups[j].teachers[0]._id) {
+          people[i].danceType = groups[j].danceType
+        }
+      }
+
+    }
+    console.log(people)
+     setData(people)
    }
      getStudents()
      
