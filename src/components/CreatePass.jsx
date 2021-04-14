@@ -3,6 +3,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 const FormGroup = styled.div`
 	color: palevioletred;
@@ -57,7 +58,12 @@ export default function CreatePass() {
     await axios.post('https://dance-school-management-system.herokuapp.com/passes',
     data
     )
-    alert('utworzono karnet')
+    swal({
+      title: 'Good job!',
+      text: 'Stworzyłeś Karnet!',
+      icon: 'success',
+      button: 'OK!',
+    })
   }
   
   return (
