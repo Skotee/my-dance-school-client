@@ -7,7 +7,7 @@ import axios from 'axios'
 const FormGroup = styled.div`
 	color: palevioletred;
   display: block;
-  font-size:1.8rem;
+  font-size:1.3rem;
 	width: 300px;
 	margin: 50px auto;
 `
@@ -57,10 +57,12 @@ export default function CreatePass() {
     await axios.post('https://dance-school-management-system.herokuapp.com/passes',
     data
     )
+    alert('utworzono karnet')
   }
   
   return (
     <FormGroup>
+        <h1>Stwórz Karnet</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
         <Input type="text" placeholder="UserID" {...register('user', {required: true})} />
         <Input type="text" placeholder="GroupID" {...register('group')} />
