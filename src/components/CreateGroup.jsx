@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import MultiSelect from 'react-multi-select-component';
 import axios from 'axios'
-
+import swal from 'sweetalert'
 
 const FormGroup = styled.div`
 	color: palevioletred;
@@ -72,7 +72,12 @@ export default function CreateGroup() {
     axios.post(`${heroku}/groups`,
       data
     )
-    alert('grupa została utworzona')
+    swal({
+      title: 'Good job!',
+      text: 'Stworzyłeś Nową Grupę!',
+      icon: 'success',
+      button: 'Aww yiss!',
+    });
   };
   useEffect(() => {
     const getPeople = axios.get('https://dance-school-management-system.herokuapp.com/users').then(function (response){
