@@ -3,6 +3,10 @@ import { Grid, InputAdornment, TextField } from '@material-ui/core'
 import { AccountCircle, LockRounded } from '@material-ui/icons'
 import styled, { keyframes } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
+
+
+const URL_AUTH_LOGIN = 'http://localhost:3000/auth/login'
 
 const moveInLeft = keyframes`
   0% {
@@ -48,15 +52,31 @@ const Input = styled.input`
 	margin-bottom: 0.5em;
 `
 
-const LoginScreen = () => {
+const Login = ({
+    setUserData
+  }) => {
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const onSubmit = async data => {
-    alert(JSON.stringify(data))
+  const login = async (data) => {
+    axios.post(
+      URL_AUTH_LOGIN, data,
+    {
+      withCredentials: true 
+    })
+    .then((response) => {
+      setUserData(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   
+  const onSubmit = async data => {
+    login(data)
+  }
+
   return (
     <StyledGrid 
-      container 
+      container
       justify="center"
       alignItems="center"
     >
@@ -74,23 +94,23 @@ const LoginScreen = () => {
                 </InputAdornment>
               ),
             }}
-            {...register('Email', {required: true, pattern: /^\S+@\S+$/i})} 
-          />
-          {errors.Email && <span>Wymagany jest prawidłowy format adresu e-mail</span>}
+            {...register('mail', {required: true, pattern: /^\S+@\S+$/i})} 
+        />
+        {errors.Email && <span>Wymagany jest prawidłowy format adresu e-mail</span>}
 
-          <StyledTextField 
-            type="password"
-            label="Hasło"
-            margin="normal"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockRounded />
-                </InputAdornment>
-              ),
-            }}
-            {...register('Password',  {required: true, minLength: 8})} 
-          />
+        <StyledTextField 
+          type="password"
+          label="Hasło"
+          margin="normal"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockRounded />
+              </InputAdornment>
+            ),
+          }}
+          {...register('password',  {required: true})} 
+        />
           {errors.Password && <span>Hasło jest wymagane</span>}
           <Input type="submit" />
         </form>
@@ -99,4 +119,4 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen
+export default Login

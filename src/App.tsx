@@ -5,18 +5,17 @@ import './App.css'
 import Dashboard from './components/Dashboard.jsx'
 import Login from './screens/Login.jsx'
 
+const URL_AUTH = 'http://localhost:3000/auth'
+const URL_AUTH_LOGOUT = 'http://localhost:3000/auth/logout'
 
 function App() {
-  const [isAuthed, setIsAuthed] = useState(false)
+  const [userData, setUserData] = useState(null)
 
   const auth = async () => {
-    axios.get('http://localhost:3000/auth', { withCredentials: true })
+    axios.get(URL_AUTH, { withCredentials: true })
     .then(function (response) {
       console.log('zalogowany')
       console.log('response', response.status)
-      if (response.status === 200) {
-        setIsAuthed(true)
-      }
     })
     .catch(function (error) {
       console.log(error)
@@ -24,55 +23,26 @@ function App() {
   }
   
   const logout = async () => {
-    axios.post('http://localhost:3000/auth/logout', { withCredentials: true })
+    axios.post(URL_AUTH_LOGOUT, {}, { withCredentials: true })
     .then(function (response) {
       console.log('logout')
       console.log('response', response)
+      setUserData(null)
     })
     .catch(function (error) {
       console.log(error)
     })
   }
-  
-  const login = async () => {
-    axios.post(
-      'http://localhost:3000/auth/login', 
-    {
-      mail:'maryla@gmail.com',
-      password: 'maryla'
-    },
-    {
-      withCredentials: true 
-    })
-    .then((response) => {
-      console.log('login')
-      console.log('response', response)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
 
-  login()
-  console.log('isAuthed', isAuthed)
-  
-  // auth()
-  // setTimeout(() => {
-  //   console.log('isAuthed', isAuthed)
-    
-  // }, 3000)
-  
-  // if (isAuthed) {
-  //   return (
-  //     <div className="App">
-  //       <Dashboard />
-  //     </div>
-  //   )
-  // }
+  console.log('test ENVA', process.env.SUPER_TEST)
+  console.log(process.env.NODE_ENV)
 
   return (
     <div className="App">
-      <Dashboard /> 
+      {userData !== null ? 
+      <Dashboard>
+        <button onClick={logout}>Logout</button>
+      </Dashboard> : <Login setUserData={setUserData} /> }
     </div>
   )
 }
