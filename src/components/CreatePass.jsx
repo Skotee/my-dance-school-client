@@ -2,10 +2,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const FormGroup = styled.div`
 	color: palevioletred;
-    display: block;
+  display: block;
   font-size:1.8rem;
 	width: 300px;
 	margin: 50px auto;
@@ -14,7 +15,7 @@ const FormGroup = styled.div`
 const Label = styled.label`
 	margin-bottom: 0.5em;
 	color: palevioletred;
-    display: block;
+  display: block;
 `
 
 
@@ -32,7 +33,7 @@ const Select = styled.select`
 	margin-bottom: 0.5em; 
   margin: auto;
 	color: palevioletred;
-    display: block;
+  display: block;
 `
 const Option = styled.option`
   
@@ -52,24 +53,26 @@ const RadioButtons = styled.div`
 export default function CreatePass() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = async data => {
-    alert(JSON.stringify(data))
-    console.log(data)
+    //'http://localhost:3000/passes'
+    await axios.post('https://dance-school-management-system.herokuapp.com/passes',
+    data
+    )
   }
   
   return (
     <FormGroup>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="UserID" {...register('UserID', {required: true})} />
-        <Input type="text" placeholder="GroupID" {...register('GroupID', {required: true})} />
-        <Select {...register('PassType', { required: true })}>
+        <Input type="text" placeholder="UserID" {...register('user', {required: true})} />
+        <Input type="text" placeholder="GroupID" {...register('group')} />
+        <Select {...register('type', { required: true })}>
             <Option value="Open">Open</Option>
             <Option value="WCS">WCS</Option>
             <Option value="Salsa">Salsa</Option>
         </Select>
-        <Input type="date" placeholder="StartDate" {...register('StartDate', {required: true})} />
-        <Input type="date" placeholder="EndDate" {...register('EndDate', {required: true})} />
-        <Input type="number" placeholder="Price" {...register('Price', {required: true, min: 0})} />
-        <Input type="number" placeholder="RemainingNumber" {...register('RemainingNumber', {required: true,min: 0})} />
+        <Input type="date" placeholder="StartDate" {...register('startDate', {required: true})} />
+        <Input type="date" placeholder="EndDate" {...register('endDate', {required: true})} />
+        <Input type="number" placeholder="Price" {...register('price', {required: true, min: 0})} />
+        <Input type="number" placeholder="RemainingNumber" {...register('remainingNumber', {required: true,min: 0})} />
         
         <Input type="submit" />
         </form>
