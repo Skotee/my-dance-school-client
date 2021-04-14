@@ -30,6 +30,7 @@ import Students from './Students.jsx'
 import Groups from './Groups.jsx'
 import CreateGroup from './CreateGroup.jsx'
 import RegisterUser from './RegisterUser.jsx'
+import CreatePass from './CreatePass.jsx'
 
 const drawerWidth = 300
 
@@ -205,9 +206,9 @@ export default function Dashboard({children}) {
                 <Link 
                   className={classes.link} 
                   component={RouterLink} 
-                  to="/createGroup"
+                  to="/createPass"
                   >
-                    Utwórz Grupe
+                    Utwórz Karnet
                   </Link>
               </ListItemText>
             </ListItem>
@@ -231,8 +232,8 @@ export default function Dashboard({children}) {
             <Route path="/registerUser">
               <RegisterUser />
             </Route>
-            <Route path="/createGroup">
-              <CreateGroup />
+            <Route path="/createPass">
+              <CreatePass />
             </Route>
           </Switch>
           </Typography>
