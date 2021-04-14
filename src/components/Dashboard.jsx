@@ -27,6 +27,7 @@ import Link from '@material-ui/core/Link'
 
 import Students from './Students.jsx'
 import Groups from './Groups.jsx'
+import Contact from './Contact.jsx'
 
 const drawerWidth = 300
 
@@ -179,6 +180,19 @@ export default function Dashboard({children}) {
                 </Link>
               </ListItemText>
             </ListItem>
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <GroupIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/contact">
+                    Formularz kontaktowy
+                </Link>
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
         </Drawer>
@@ -195,6 +209,9 @@ export default function Dashboard({children}) {
             </Route>
             <Route path="/groups">
               <Groups />
+            </Route>
+            <Route path="/contact">
+              <Contact />
             </Route>
           </Switch>
           </Typography>
