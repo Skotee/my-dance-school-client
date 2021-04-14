@@ -9,12 +9,10 @@ module.exports = {
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'react-app',
-    'airbnb',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:promise/recommended',
 	],
 	'parser': '@typescript-eslint/parser',
 	'parserOptions': {
