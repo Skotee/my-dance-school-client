@@ -39,10 +39,11 @@ function App() {
 
   return (
     <div className="App">
-      {userData !== null ? 
+      {/* {userData !== null ? 
       <Dashboard>
         <button onClick={logout}>Logout</button>
-      </Dashboard> : <Login setUserData={setUserData} /> }
+      </Dashboard> : <Login setUserData={setUserData} /> } */}
+      <Dashboard><button onClick={logout}>Logout</button></Dashboard>
     </div>
   )
 }
