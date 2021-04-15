@@ -190,20 +190,21 @@ function Students() {
 
      let people = []
      let groups = []
-     await axios.get('http://localhost:3000/users').then(students => {
+     await axios.get('https://dance-school-management-system.herokuapp.com/users').then(students => {
        people = students.data   
      })      
-     await axios.get('http://localhost:3000/groups').then(dance => {
+     await axios.get('https://dance-school-management-system.herokuapp.com/groups').then(dance => {
       groups = dance.data
     })    
 
-    for (let i = 0; i < people.length; i++) {
+    /*for (let i = 0; i < people.length; i++) {
       for (let j = 0; j < groups.length; j++) {
         if (people[i]._id == groups[j].students[0]._id || people[i]._id == groups[j].teachers[0]._id) {
           people[i].danceType = groups[j].danceType
         }
       }
-    }
+    }*/
+
      setData(people)
    }
      getStudents()
