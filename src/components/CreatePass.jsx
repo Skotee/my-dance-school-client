@@ -4,49 +4,46 @@ import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import axios from 'axios'
 import swal from 'sweetalert'
-
-const FormGroup = styled.div`
-	color: palevioletred;
-  display: block;
-  font-size:1.3rem;
-	width: 300px;
-	margin: 50px auto;
-`
-
-const Label = styled.label`
-	margin-bottom: 0.5em;
-	color: palevioletred;
-  display: block;
-`
+import Radio from '@material-ui/core/Radio'
+import { makeStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import FormControl from '@material-ui/core/FormControl'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
+import { InputLabel } from '@material-ui/core'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Grid from '@material-ui/core/Grid'
 
 
-const Input = styled.input`
-	padding: 0.5em;
-	color: palevioletred;
-	background: papayawhip;
-	border: none;
-	border-radius: 3px;
-	width: 100%;
-	margin-bottom: 0.5em;
+const InputM = styled(TextField)`
+	margin-bottom: 1.5em;
 `
-
-const Select = styled.select`
-	margin-bottom: 0.5em; 
-  margin: auto;
-	color: palevioletred;
-  display: block;
+const SelectM = styled(Select)`
+    margin-bottom: 1.5em;   
 `
-const Option = styled.option`
-  
+const RadioM = styled(RadioGroup)`
+    margin-bottom: 1.5em;   
+    margin: auto;
 `
-const Radio = styled.input`
-	margin-bottom: 0.5em;
-	color: palevioletred;
-  display: inline;
+const H1 = styled.h1` 
+    text-align:center;
+    margin-bottom: 1.5em; 
 `
-const RadioButtons = styled.div`
-  display:flex;
-  justify-content:space-between;
+const FormControlM = styled(FormControl)` 
+    width:50%;
+    margin:auto;
+    
+`
+const Btn = styled(Button)` 
+    width:50%;
+    margin:auto;
+    
+`
+const Form = styled.form`
+    text-align: center;
+    
 `
 
 
@@ -67,23 +64,25 @@ export default function CreatePass() {
   }
   
   return (
-    <FormGroup>
-        <h1>Stwórz Karnet</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" placeholder="UserID" {...register('user', {required: true})} />
-        <Input type="text" placeholder="GroupID" {...register('group')} />
-        <Select {...register('type', { required: true })}>
-            <Option value="Open">Open</Option>
-            <Option value="WCS">WCS</Option>
-            <Option value="Salsa">Salsa</Option>
-        </Select>
-        <Input type="date" placeholder="StartDate" {...register('startDate', {required: true})} />
-        <Input type="date" placeholder="EndDate" {...register('endDate', {required: true})} />
-        <Input type="number" placeholder="Price" {...register('price', {required: true, min: 0})} />
-        <Input type="number" placeholder="RemainingNumber" {...register('remainingNumber', {required: true,min: 0})} />
+  <Form onSubmit={handleSubmit(onSubmit)}>
+    <FormControlM>
+        <H1>Stwórz Karnet</H1>
         
-        <Input type="submit" />
-        </form>
-    </FormGroup>
+        <InputM variant="outlined" type="text" placeholder="UserID" {...register('user', {required: true})} />
+        <InputM variant="outlined" type="text" placeholder="GroupID" {...register('group')} />
+        <SelectM {...register('type', { required: true })}>
+            <MenuItem value="Open">Open</MenuItem>
+            <MenuItem value="WCS">WCS</MenuItem>
+            <MenuItem value="Salsa">Salsa</MenuItem>
+        </SelectM>
+        <InputM variant="outlined" type="date" placeholder="StartDate" {...register('startDate', {required: true})} />
+        <InputM variant="outlined" type="date" placeholder="EndDate" {...register('endDate', {required: true})} />
+        <InputM variant="outlined" type="number" placeholder="Price" {...register('price', {required: true, min: 0})} />
+        <InputM variant="outlined" type="number" placeholder="RemainingNumber" {...register('remainingNumber', {required: true,min: 0})} />
+        
+        <Btn type="submit" variant="contained" color="primary">Submit</Btn>
+        
+    </FormControlM>
+  </Form>
   )
 }
