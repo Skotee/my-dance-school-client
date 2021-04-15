@@ -33,7 +33,6 @@ import RegisterUser from './RegisterUser.jsx'
 import CreatePass from './CreatePass.jsx'
 import Contact from './Contact.jsx'
 
-
 const drawerWidth = 300
 
 const useStyles = makeStyles((theme) =>
@@ -210,7 +209,7 @@ export default function Dashboard({children}) {
                   component={RouterLink} 
                   to="/createGroup"
                   >
-                    Utwórz Grupe
+                    Utwórz Grupę
                   </Link>
               </ListItemText>
             </ListItem>
