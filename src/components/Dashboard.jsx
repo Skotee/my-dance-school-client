@@ -228,6 +228,19 @@ export default function Dashboard({children}) {
                   </Link>
               </ListItemText>
             </ListItem>
+            <ListItem button >
+              <ListItemIcon className={classes.listItemIcon}> 
+                <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText>
+                <Link 
+                  className={classes.link} 
+                  component={RouterLink} 
+                  to="/contact">
+                    Formularz kontaktowy
+                  </Link>
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
         </Drawer>
