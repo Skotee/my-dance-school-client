@@ -6,50 +6,49 @@ import styled from 'styled-components'
 import MultiSelect from 'react-multi-select-component';
 import axios from 'axios'
 import swal from 'sweetalert'
-
-const FormGroup = styled.div`
-	color: palevioletred;
-    display: block;
-  font-size:1.2rem;
-	width: 300px;
-	margin: 50px auto;
-`
-
-const Label = styled.label`
-	margin-bottom: 0.5em;
-	color: palevioletred;
-    display: block;
-`
+import Radio from '@material-ui/core/Radio'
+import { makeStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import FormControl from '@material-ui/core/FormControl'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
+import { InputLabel } from '@material-ui/core'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Grid from '@material-ui/core/Grid'
 
 
-const Input = styled.input`
-	padding: 0.5em;
-	color: palevioletred;
-	background: papayawhip;
-	border: none;
-	border-radius: 3px;
-	width: 100%;
-	margin-bottom: 0.5em;
+const InputM = styled(TextField)`
+	margin-bottom: 1.5em;
+`
+const SelectM = styled(Select)`
+    margin-bottom: 1.5em;   
+`
+const RadioM = styled(RadioGroup)`
+    margin-bottom: 1.5em;   
+    margin: auto;
+`
+const H1 = styled.h1` 
+    text-align:center;
+    margin-bottom: 1.5em; 
+`
+const FormControlM = styled(FormControl)` 
+    width:50%;
+    margin:auto;
+    
+`
+const Btn = styled(Button)` 
+    width:50%;
+    margin:auto;
+    margin-top: 1.6em;
+    
+`
+const Form = styled.form`
+    text-align: center;
+    
 `
 
-// const Select = styled.select`
-// 	margin-bottom: 0.5em; 
-//   margin: auto;
-// 	color: palevioletred;
-//     display: block;
-// `
-const Option = styled.option`
-  
-`
-const Radio = styled.input`
-	margin-bottom: 0.5em;
-	color: palevioletred;
-  display: inline;
-`
-const RadioButtons = styled.div`
-  display:flex;
-  justify-content:space-between;
-`
 const createOption = person => {
   return {
     label: `${person.name} ${person.surname}`,
@@ -93,29 +92,30 @@ export default function CreateGroup() {
 
   
   return (
-    <FormGroup>
-        <h1>Utwórz Grupę</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register('danceType', { required: true })}>
-            <Option value="salsa">Salsa</Option>
-            <Option value="tango">Tango</Option>
-            <Option value="westcoastswing ">WestCoastSwing </Option>
-            <Option value="zouk">Zouk</Option>
-            <Option value="discofox">Discofox</Option>
-        </select>
-        <select {...register('advanceLevel', { required: true })}>
-            <Option value="p1a">p1a</Option>
-            <Option value="p1b">p1b</Option>
-            <Option value="p1c">p1c</Option>
-            <Option value="p2a">p2a</Option>
-            <Option value="p2b">p2b</Option>
-            <Option value="p2c">p2c</Option>
-            <Option value="p2c">p2c</Option>
-            <Option value="p3a">p3a</Option>
-            <Option value="p3b">p3b</Option>
-            <Option value="p3c">p3c</Option>
-        </select>
-        <Input type="number" placeholder="maxAmount" {...register('maxAmount', {required: true, min: 0})} />
+    <Form onSubmit={handleSubmit(onSubmit)}>
+    <FormControlM>
+        <H1>Utwórz Grupę</H1>
+        
+        <SelectM variant="outlined" {...register('danceType', { required: true })}>
+            <MenuItem value="salsa">Salsa</MenuItem>
+            <MenuItem value="tango">Tango</MenuItem>
+            <MenuItem value="westcoastswing ">WestCoastSwing </MenuItem>
+            <MenuItem value="zouk">Zouk</MenuItem>
+            <MenuItem value="discofox">Discofox</MenuItem>
+        </SelectM>
+        <SelectM variant="outlined" {...register('advanceLevel', { required: true })}>
+            <MenuItem value="p1a">p1a</MenuItem>
+            <MenuItem value="p1b">p1b</MenuItem>
+            <MenuItem value="p1c">p1c</MenuItem>
+            <MenuItem value="p2a">p2a</MenuItem>
+            <MenuItem value="p2b">p2b</MenuItem>
+            <MenuItem value="p2c">p2c</MenuItem>
+            <MenuItem value="p2c">p2c</MenuItem>
+            <MenuItem value="p3a">p3a</MenuItem>
+            <MenuItem value="p3b">p3b</MenuItem>
+            <MenuItem value="p3c">p3c</MenuItem>
+        </SelectM>
+        <InputM variant="outlined" type="number" placeholder="maxAmount" {...register('maxAmount', {required: true, min: 0})} />
         
         <div>
           <h4>Dodaj Nauczycieli</h4>
@@ -137,10 +137,11 @@ export default function CreateGroup() {
             labelledBy="Select"
           />
         </div>
-        <Input type="submit" />
+        <Btn type="submit" variant="contained" color="primary">Submit</Btn>
         
-        </form>
         
-    </FormGroup>
+        
+    </FormControlM>
+    </Form>
   )
 }
