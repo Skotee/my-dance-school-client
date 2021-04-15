@@ -46,7 +46,7 @@ function App() {
       <Dashboard>
         <button onClick={logout}>Logout</button>
       </Dashboard> : <Login setUserData={setUserData} /> }
-      
+    </div>
   )
 }
 
