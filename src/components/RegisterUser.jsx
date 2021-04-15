@@ -17,6 +17,7 @@ import { InputLabel } from '@material-ui/core'
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
+import { API_URL } from '../config/server.config';
 
 const InputM = styled(TextField)`
 	margin-bottom: 1.5em;
@@ -51,8 +52,9 @@ const RegisterUser = () => {
 
     const onSubmit = async data => {
         console.log({data})
-        await axios.post('https://dance-school-management-system.herokuapp.com/users',
-            data
+        await axios.post(`${API_URL}/users`,
+            data,
+            { withCredentials: true }
         )
         swal({
           title: 'Good job!',

@@ -3,6 +3,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles'
+import { API_URL } from '../config/server.config'
 
 const useStyles = makeStyles((theme) =>
   createStyles ({
@@ -30,7 +31,7 @@ const Groups = () => {
   let groups = []
 
   useEffect(() => {
-    axios.get('https://dance-school-management-system.herokuapp.com/groups')
+    axios.get(`${API_URL}/groups`, { withCredentials: true })
       .then(response => {
         groups = response.data
         let rowsData = []

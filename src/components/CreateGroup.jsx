@@ -17,6 +17,7 @@ import { InputLabel } from '@material-ui/core'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
+import { API_URL } from '../config/server.config';
 
 
 const InputM = styled(TextField)`
@@ -66,10 +67,10 @@ export default function CreateGroup() {
     data.teachers = teachersState.map(p =>p.value);
     data.students = studentsState.map(p =>p.value);
     
-    const local = 'http://localhost:3000'
-    const heroku = 'https://dance-school-management-system.herokuapp.com'
-    axios.post(`${heroku}/groups`,
-      data
+  
+    axios.post(`${API_URL}/groups`,
+      data,
+      { withCredentials: true }
     )
     swal({
       title: 'Good job!',
@@ -79,7 +80,7 @@ export default function CreateGroup() {
     });
   };
   useEffect(() => {
-    const getPeople = axios.get('https://dance-school-management-system.herokuapp.com/users').then(function (response){
+    const getPeople = axios.get(`${API_URL}users`, { withCredentials: true }).then(function (response){
       console.log(response.data)
       const teachers = response.data.filter(person=>person.role.includes('teacher')).map(createOption)
       const students = response.data.filter(person=>person.role.includes('student')).map(createOption)
