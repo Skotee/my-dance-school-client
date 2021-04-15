@@ -12,6 +12,11 @@ import axios from 'axios'
 
 import { useTable, useSortBy, useFilters, useColumnOrder, useBlockLayout } from 'react-table'
 
+const URL_USERS_PROD = 'https://dance-school-management-system.herokuapp.com/users'
+const URL_USERS_LOCAL = 'http://localhost:3000/users'
+
+const URL_GROUPS_PROD = 'https://dance-school-management-system.herokuapp.com/groups'
+const URL_GROUPS_LOCAL = 'http://localhost:3000/groups'
 
 function DefaultColumnFilter({
     column: { filterValue, preFilteredRows, setFilter },
@@ -179,7 +184,6 @@ function Students() {
         ],
       },
     ],
-    
   )
 
  const [data, setData] = useState([])
@@ -190,10 +194,10 @@ function Students() {
 
      let people = []
      let groups = []
-     await axios.get('http://localhost:3000/users').then(students => {
+     await axios.get(URL_USERS_PROD).then(students => {
        people = students.data   
      })      
-     await axios.get('http://localhost:3000/groups').then(dance => {
+     await axios.get(URL_GROUPS_PROD).then(dance => {
       groups = dance.data
     })    
 
