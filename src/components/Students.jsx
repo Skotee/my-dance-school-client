@@ -11,6 +11,7 @@ import ActionsMenu from './ActionsMenu.jsx'
 import axios from 'axios'
 
 import { useTable, useSortBy, useFilters, useColumnOrder, useBlockLayout } from 'react-table'
+import { API_URL } from '../config/server.config.js'
 
 
 function DefaultColumnFilter({
@@ -183,6 +184,7 @@ function Students() {
   )
 
  const [data, setData] = useState([])
+
  
  useEffect(() => {
 
@@ -190,10 +192,10 @@ function Students() {
 
      let people = []
      let groups = []
-     await axios.get('https://dance-school-management-system.herokuapp.com/users').then(students => {
+     await axios.get(`${API_URL}/users`,  { withCredentials: true }).then(students => {
        people = students.data   
      })      
-     await axios.get('https://dance-school-management-system.herokuapp.com/groups').then(dance => {
+     await axios.get(`${API_URL}/groups`,  { withCredentials: true }).then(dance => {
       groups = dance.data
     })    
 

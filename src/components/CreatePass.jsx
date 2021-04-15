@@ -15,6 +15,7 @@ import { InputLabel } from '@material-ui/core'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
+import { API_URL } from '../config/server.config'
 
 
 const InputM = styled(TextField)`
@@ -51,9 +52,9 @@ const Form = styled.form`
 export default function CreatePass() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = async data => {
-    //'http://localhost:3000/passes'
-    await axios.post('https://dance-school-management-system.herokuapp.com/passes',
-    data
+    await axios.post(`${API_URL}/passes`,
+    data,
+    { withCredentials: true }
     )
     swal({
       title: 'Good job!',

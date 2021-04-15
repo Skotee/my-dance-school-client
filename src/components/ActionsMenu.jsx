@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreditCardIcon from '@material-ui/icons/CreditCard'
 import axios from 'axios'
+import { API_URL } from '../config/server.config'
 
 const StyledMenu = withStyles({
   paper: {
@@ -56,15 +57,15 @@ export default function ActionsMenu(props) {
 
     async function handleDelete() {
     let groups = []
-     await axios.get('http://localhost:3000/groups').then(dance => {
+     await axios.get(`${API_URL}/groups`, { withCredentials: true }).then(dance => {
       groups = dance.data
     })   
     for (let i = 0; i < groups.length; i++) {
       if (groups[i].students[0]._id == props.id._id) {
-        axios.delete('http://localhost:3000/groups/' + groups[i]._id)
+        axios.delete(`${API_URL}/groups/` + groups[i]._id, { withCredentials: true })
       }
     }
-    await axios.delete('http://localhost:3000/users/' + props.id._id)
+    await axios.delete(`${API_URL}/users/` + props.id._id, { withCredentials: true })
     window.location.reload()
     return false
   } 

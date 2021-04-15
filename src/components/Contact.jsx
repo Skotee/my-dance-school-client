@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { InputLabel } from '@material-ui/core'
 import axios from 'axios'
+import { API_URL } from '../config/server.config'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ const Contact = () => {
   }
 
   const showInstructors = () => {
-    axios.get('https://dance-school-management-system.herokuapp.com/users')
+    axios.get(`${API_URL}/users`, { withCredentials: true })
     .then(response => {
       let users = response.data
       let teachersNames = []
@@ -56,7 +57,7 @@ const Contact = () => {
   } 
 
   const showStudents = () => {
-    axios.get('https://dance-school-management-system.herokuapp.com/users')
+    axios.get(`${API_URL}/users`,  { withCredentials: true })
     .then(response => {
       let users = response.data
       let studentsNames = []
@@ -74,7 +75,7 @@ const Contact = () => {
   } 
 
   const showGroups = () => {
-    axios.get('https://dance-school-management-system.herokuapp.com/groups')
+    axios.get(`${API_URL}/groups`, { withCredentials: true })
     .then(response => {
       let groups = response.data
       let groupsNames = []
