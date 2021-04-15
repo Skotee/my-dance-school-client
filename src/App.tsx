@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from 'react'
 import axios from 'axios'
-import './App.css'
 import Dashboard from './components/Dashboard.jsx'
 import Login from './screens/Login.jsx'
 import { API_URL } from './config/server.config'
